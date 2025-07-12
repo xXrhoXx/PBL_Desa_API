@@ -25,6 +25,7 @@ Route::middleware('auth:api')->group(function () {
 });
 
 // Produk route pakai middleware langsung via class
+// Route API untuk admin, pakai token
 Route::middleware([JwtMiddleware::class])->group(function () {
     Route::get('/produks', [ProdukController::class, 'index']);
     Route::get('/produks/{id}', [ProdukController::class, 'show']);
@@ -32,6 +33,10 @@ Route::middleware([JwtMiddleware::class])->group(function () {
     Route::put('/produks/{id}', [ProdukController::class, 'update']);
     Route::delete('/produks/{id}', [ProdukController::class, 'destroy']);
 });
+
+// Route API public tanpa token
+Route::get('/produk-user', [ProdukController::class, 'produkPublic']);
+
 // riwayat cetak pdf spkv
 Route::middleware('auth:api')->group(function () {
     Route::get('/riwayat-spkv', [RiwayatSPKVController::class, 'index']);

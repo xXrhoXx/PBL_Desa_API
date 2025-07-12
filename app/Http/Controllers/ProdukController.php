@@ -61,7 +61,7 @@ class ProdukController extends Controller
             return response()->json(['message' => 'Produk tidak ditemukan'], 404);
         }
 
-        $produk->gambar = base64_encode($produk->gambar);
+        $produk->gambar = 'data:image/jpeg;base64,' . base64_encode($produk->gambar);
 
         return response()->json($produk);
     }
@@ -98,7 +98,7 @@ class ProdukController extends Controller
         $produk->save();
 
         // Encode gambar agar bisa di-JSON-kan
-        $produk->gambar = base64_encode($produk->gambar);
+        $produk->gambar = 'data:image/jpeg;base64,' . base64_encode($produk->gambar);
 
         return response()->json($produk);
     }
@@ -113,4 +113,14 @@ class ProdukController extends Controller
         $produk->delete();
         return response()->json(['message' => 'Produk berhasil dihapus']);
     }
+
+    public function produkPublic()
+    {
+        $produks = Produk::all();
+        foreach ($produks as $produk) {
+            $produk->gambar = base64_encode($produk->gambar);
+        }
+        return response()->json($produks);
+    }
+
 }
