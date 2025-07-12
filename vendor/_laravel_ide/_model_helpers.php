@@ -5,6 +5,20 @@ namespace App\Models {
     /**
      * App\Models\PerangkatDesa
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property mixed $foto
+     * @property string $kontak
+     * @property string $jabatan
+     * @property string $nama
+     * @property int $id
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereNama($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereJabatan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereKontak($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereFoto($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<PerangkatDesa>|PerangkatDesa query()
@@ -304,6 +318,22 @@ namespace App\Models {
     /**
      * App\Models\Produk
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property mixed $gambar
+     * @property string $kontak
+     * @property string $harga
+     * @property string $deskripsi
+     * @property string $nama_produk
+     * @property int $id
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereNamaProduk($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereDeskripsi($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereHarga($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereKontak($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereGambar($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk query()
