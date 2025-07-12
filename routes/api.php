@@ -10,6 +10,7 @@ use App\Http\Controllers\RiwayatSKDBController;
 use App\Http\Controllers\RiwayatSKTMController;
 use App\Http\Controllers\RiwayatSPKVController;
 use App\Http\Controllers\RiwayatSKKKKController;
+use App\Http\Controllers\PerangkatDesaController;
 
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -72,3 +73,11 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/riwayat-skdb/{id}', [RiwayatSKDBController::class, 'destroy']);
 });
 
+
+Route::middleware([JwtMiddleware::class])->group(function () {
+    Route::get('/perangkat-desa', [PerangkatDesaController::class, 'index']);
+    Route::post('/perangkat-desa', [PerangkatDesaController::class, 'store']);
+    Route::get('/perangkat-desa/{id}', [PerangkatDesaController::class, 'show']);
+    Route::put('/perangkat-desa/{id}', [PerangkatDesaController::class, 'update']);
+    Route::delete('/perangkat-desa/{id}', [PerangkatDesaController::class, 'destroy']);
+});

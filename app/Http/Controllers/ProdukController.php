@@ -22,41 +22,38 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_produk' => 'required|string',
-            'deskripsi'   => 'required|string',
-            'harga'       => 'required|string',
-            'kontak'      => 'required|string',
-            'gambar'      => 'required|file|mimes:jpg,jpeg,png'
+            'nama'    => 'required|string',
+            'jabatan' => 'required|string',
+            'kontak'  => 'required|string',
+            'foto'    => 'required|file|mimes:jpg,jpeg,png'
         ]);
 
         try {
-            $gambar = file_get_contents($request->file('gambar')->getRealPath());
+            // Ambil file foto lalu konversi ke binary
+            $foto = file_get_contents($request->file('foto')->getRealPath());
 
-            $produk = Produk::create([
-                'nama_produk' => $request->nama_produk,
-                'deskripsi'   => $request->deskripsi,
-                'harga'       => $request->harga,
-                'kontak'      => $request->kontak,
-                'gambar'      => $gambar
+            $perangkat = PerangkatDesa::create([
+                'nama'    => $request->nama,
+                'jabatan' => $request->jabatan,
+                'kontak'  => $request->kontak,
+                'foto'    => $foto
             ]);
 
-            // Coba encode ke JSON
-            return response()->json($produk, 201);
+            return response()->json($perangkat, 201);
 
         } catch (JsonEncodingException $e) {
             return response()->json([
-                'message' => 'Produk berhasil diunggah ke database, tetapi data gambar tidak dapat ditampilkan di response JSON.',
-                'produk_id' => $produk->id
+                'message'     => 'Data berhasil diunggah ke database, tetapi gambar tidak bisa ditampilkan di response JSON.',
+                'perangkat_id' => $perangkat->id
             ], 201);
 
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Terjadi kesalahan saat menyimpan produk.',
+                'message' => 'Terjadi kesalahan saat menyimpan data perangkat.',
                 'error'   => $e->getMessage()
             ], 500);
         }
     }
-
     public function show($id)
     {
         $produk = Produk::find($id);
