@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\Variable;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Validator;
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -24,7 +27,7 @@ class AuthController extends Controller
 
     public function test(Request $request)
     {
-       //dd('test');
+        //dd('test');
     }
 
     public function logout()
@@ -38,7 +41,15 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
-
+    //menyimpan riwayat pdf
+    public function riwayat_cetak()
+    {
+        return auth()->user()->isAdmin;
+    }
+    public function is_admin()
+    {
+        return auth()->user()->isAdmin;
+    }
 
     public function register(Request $request)
     {
@@ -48,7 +59,8 @@ class AuthController extends Controller
             'email' => 'nullable|email|unique:users,email',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6',
+            'isAdmin' => 'boolean|required'
         ]);
 
         if ($validator->fails()) {
@@ -61,7 +73,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'isAdmin' =>  $request->isAdmin
         ]);
 
         $token = JWTAuth::fromUser($user);
